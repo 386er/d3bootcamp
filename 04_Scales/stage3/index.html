@@ -1,6 +1,12 @@
 <body>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style> 
+
+body {margin: 50px;}
+
+</style>
 	
 
 <script>
@@ -12,22 +18,22 @@
 				.attr('width', 1200);
 
 
-	var x = d3.scale.linear()
+	var y = d3.scale.linear()
 				.domain([0, 6500])
 				.range([0, 600])
 
-				var c = d3.scale.linear()	
-							.domain([0,6000])
-							.range(['blue', 'red'])	
+	var c = d3.scale.linear()	
+				.domain([0,6000])
+				.range(['blue', 'red'])	
 
 	var rect = svg.selectAll('rect')
 				.data(array)
 				.enter()
 				.append('rect')
 				.attr('width', 40)
-				.attr('height', function(d) { return x(d)})
+				.attr('height', function(d) { return y(d)})
 				.attr('x', function(d,i) {return 100 + i*100})
-				.attr('y', function(d) {return 600 - x(d)})
+				.attr('y', function(d) {return 600 - y(d)})
 				.attr('fill', function(d) {return c(d);});
 
 

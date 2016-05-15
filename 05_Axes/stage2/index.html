@@ -18,23 +18,29 @@ body {margin: 50px;}
 				.attr('width', 1200);
 
 
-	var y = d3.scale.linear()
+	var x = d3.scale.linear()
 				.domain([0, 6500])
-				.range([0, 600])
+				.range([0, 1200])
+
 
 	var rect = svg.selectAll('rect')
 				.data(array)
 				.enter()
 				.append('rect')
-				.attr('width', 40)
-				.attr('height', function(d) { return y(d)})
-				.attr('x', function(d,i) {return 100 + i*100})
-				.attr('y', function(d) {return 600 - y(d)})
+				.attr('width', function(d) {return x(d)})
+				.attr('height', 10)
+				.attr('x', 0)
+				.attr('y', function(d,i) {return i*20})
 				.attr('fill', 'blue');
 
 
 
-	/* YOUR CODE HERE */
+	var axis = d3.svg.axis().scale(x).orient('bottom');
+
+
+	svg.append('g')
+		.attr("transform", "translate(0,220)")
+		.call(axis)
 
 
 
