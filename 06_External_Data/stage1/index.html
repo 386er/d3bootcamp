@@ -1,0 +1,63 @@
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style> 
+
+body {margin: 50px;}
+
+</style>
+	
+
+<script>
+
+
+d3.csv("titanic.csv", function(data) {
+
+
+	console.log(data);
+
+
+	var height = 800;
+	var width = 1200;
+
+	var svg = d3.select('body')
+				.append('svg')
+				.attr('width', width)
+				.attr('height', height);
+
+
+
+	var x = d3.scale.ordinal()
+					.domain([3,2,1])
+					.range([300, 600, 900])
+
+
+	var y = d3.scale.linear()
+					.domain([0,300])
+					.range([0, height]) 				
+
+
+
+	svg.selectAll('circle')
+		.data(data)
+		.enter()
+		.append('circle')
+		.attr('cx', function(d) {return x(d.Pclass) + Math.random()*200})
+		.attr('cy', function(d) {return height -50 - y(d.Fare)})
+		.attr('r', 3);
+
+
+});
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+
