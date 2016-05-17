@@ -22,35 +22,35 @@ d3.csv("titanic.csv", function(data) {
 
 
 	var margin = {top: 30, right: 30, bottom: 20, left: 50};
-	var height = 800 - margin.top  // YOUR CODE HERE
-	var width = 1200  // YOUR CODE HERE
+	var height = 800 - margin.top - margin.bottom;
+	var width = 1200 - margin.left - margin.right;
 
 
 	var svg = d3.select('body')
 				.append('svg')
-				.attr('width', width  // YOUR CODE HERE
+				.attr('width', width + margin.left + margin.right)
 				.attr('height', height + margin.top + margin.bottom)
 				.append('g')
-				.attr('transform', // YOUR CODE HERE
+				.attr('transform', 'translate('+ margin.left +',' + margin.top +')');
 
 
 
 	var x = d3.scale.linear()
 					.domain([0,80])
-					.range([ // YOUR CODE HERE
+					.range([0,width])
 
 
 	var y = d3.scale.log()
 					.domain([6,500])
-					.range([ // YOUR CODE HERE
+					.range([height, 0])
 
 
 	var c = d3.scale.ordinal()
-					.domain([// YOUR CODE HERE
+					.domain([1,2,3])
 					.range(['#ff4d4d','#00cc66','orange'])							
 
 
-	var axisX = d3.svg.axis().scale(x).orient( // YOUR CODE HERE
+	var axisX = d3.svg.axis().scale(x).orient('bottom')
 	var axisY = d3.svg.axis().scale(y).orient('left')
 
 
@@ -69,7 +69,7 @@ d3.csv("titanic.csv", function(data) {
 
 	svg.append('g')
 		.attr('class', 'axis')
-		.attr('transform', // YOUR CODE HERE
+		.attr('transform', 'translate( 0,' + height +')')
 		.call(axisX)
 
 	svg.append('g')
