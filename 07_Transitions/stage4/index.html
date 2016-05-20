@@ -66,10 +66,28 @@
 		.attr('fill', 'steelblue')
 
 
+
+
 	var triggerTransition = function() {
 
-		// YOUR CODE HERE
-		
+
+		data = [203, 149, 392, 100, 200, 320, 190, 22, 50, 123, 200]
+
+		y.domain([0, d3.max(data)]);
+		x.rangeRoundBands([0,width], .4)
+
+		axisX.transition().duration(1500).call(axisObjectX)
+		axisY.transition().duration(1500).call(axisObjectY);
+
+		svg.selectAll('rect')
+			.data(data)
+			.transition()
+			.duration(1500)
+			.attr('fill', 'green')
+			.attr('width', x.rangeBand())
+			.attr('height', function(d) {return height - y(d)})
+			.attr('y', function(d) {return y(d)})
+			.attr('x', function(d,i) {return x(i)});
 	};
 
 

@@ -66,11 +66,28 @@
 		.attr('fill', 'steelblue')
 
 
+
+
 	var triggerTransition = function() {
 
+
+
+		// data = [203, 149, 392, 100, 200, 320, 190, 22, 50, 123, 200]
 		// YOUR CODE HERE
-		
-	};
+
+
+		x.rangeRoundBands([0,width], .4)
+		axisX.transition().duration(1500).call(axisObjectX);
+
+
+		svg.selectAll('rect')
+			.transition()
+			.duration(1500)
+			.attr('fill', 'green')
+			.attr('width', x.rangeBand())
+			.attr('x', function(d,i) {return x(i)});
+
+	}
 
 
 

@@ -66,11 +66,21 @@
 		.attr('fill', 'steelblue')
 
 
+
+
 	var triggerTransition = function() {
 
+
 		// YOUR CODE HERE
-		
-	};
+
+
+		svg.selectAll('rect')
+			.transition()
+			.duration(1500)
+			.attr('fill', 'green');
+		// YOUR CODE HERE
+
+	}
 
 
 
