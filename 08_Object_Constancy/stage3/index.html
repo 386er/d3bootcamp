@@ -1,0 +1,117 @@
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style> 
+
+.axis path,
+.axis line {
+	fill: transparent;
+	stroke: gray;
+	shape-rendering: crispEdges;
+	}
+
+</style>
+	
+
+<script>
+
+
+	var data_one = [
+	{value:203, key:'a'},
+	{value:149, key:'b'},
+	{value:70, key:'c'},
+	{value:400, key:'d'},
+	{value:420, key:'e'},
+	{value:90, key:'f'},
+	{value:22, key:'g'},
+	{value:320, key:'h'},
+	{value:123, key:'i'},
+	{value:400, key:'j'}];
+
+		var data_two = [
+	{value:303, key:'k'},
+	{value:49, key:'l'},
+	{value:70, key:'m'},
+	{value:200, key:'n'},
+	{value:40, key:'o'},
+	{value:10, key:'p'},
+	{value:22, key:'q'},
+	{value:320, key:'r'},
+	{value:223, key:'s'},
+	{value:20, key:'t'}]
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40};
+	var height = 500 - margin.top - margin.bottom;
+	var width = 800 - margin.left - margin.right;
+
+
+	var svg = d3.select('body')
+				.append('svg')
+				.attr('width', width + margin.left + margin.right)
+				.attr('height', height + margin.top + margin.bottom)
+				.append('g')
+				.attr('transform', 'translate('+ margin.left +',' + margin.top +')');
+
+
+	var y = d3.scale.linear()
+					.domain([0, d3.max(data_one, function(d) {return d.value})])
+					.range([height, 0])
+
+
+	var axisObjectY = d3.svg.axis().scale(y).orient('left')
+
+					
+	var axisY = svg.append('g')
+		.attr('class', 'axis')
+		.call(axisObjectY)
+
+
+	svg.selectAll('rect')
+		.data(data_one, function(d) {return d.key})
+		.enter()
+		.append('rect')
+		.attr('height', function(d) {return height - y(d.value)})
+		.attr('width', 20)
+		.attr('x', function(d,i) {return 70 * i + 50 })
+		.attr('y', function(d) {return y(d.value)})
+		.attr('fill', 'steelblue')
+
+
+	var moveDataSet = function(data) {
+
+
+		var selection = svg.selectAll('rect')
+					.data(data, function(d) {return d.key});
+
+		selection.exit()
+			// YOUR CODE HERE
+
+		selection.enter()
+			// YOUR CODE HERE
+
+	};
+
+
+	var showDataOne = function() {
+		moveDataSet(data_one)
+	};
+
+	var showDataTwo = function() {
+		moveDataSet(data_two)
+	};
+
+
+
+
+
+</script>
+
+
+<button onclick="showDataOne()">Show Dataset 1 </button>
+<button onclick="showDataTwo()">Show Dataset 2</button>
+
+
+
+</body>
+
