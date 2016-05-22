@@ -1,0 +1,112 @@
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style>
+
+.tooltip {
+	opacity: 0;
+	border: 1px solid gray;
+	width: 140px;
+	height: 40px;
+	padding-top: 5px;
+	position: absolute;
+	border-radius: 8px;
+	left: 478px;
+	top: 317px;
+	background: rgb(242, 242, 242);
+}
+
+.tooltip-content {
+
+font-size:20px;
+margin-top:5%;
+text-align: center;
+}	
+
+
+</style>
+	
+<script>
+
+
+	var data = d3.range(0,100).map(function(entry) {
+		 return {x: Math.random()*1200, y: Math.random()*600, value: 'abcdefghijklmnopqrstuvwxyz'.split('')[Math.ceil(Math.random()*26)]}
+	})
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40};
+	var height = 500 - margin.top - margin.bottom;
+	var width = 800 - margin.left - margin.right;
+
+
+	var svg = d3.select('body')
+				.append('svg')
+				.attr('width', width + margin.left + margin.right)
+				.attr('height', height + margin.top + margin.bottom)
+				.append('g')
+				.attr('transform', 'translate('+ margin.left +',' + margin.top +')');
+
+
+	var x = d3.scale.linear()
+					.domain([0, d3.max(data, function(d) {return d.x})])
+					.range([0, width])
+
+	var y = d3.scale.linear()
+					.domain([0, d3.max(data, function(d) {return d.y})])
+					.range([height, 0])
+
+
+
+
+	var tooltip = d3.select('body')
+					.append('div')
+					.attr('class', 'tooltip')
+
+
+
+
+
+	svg.selectAll('circle')
+		.data(data)
+		.enter()
+		.append('circle')
+		.attr('r', 5)
+		.attr('cx', function(d) {return x(d.x)})
+		.attr('cy', function(d) {return y(d.y)})
+		.attr('fill', 'steelblue')
+		.on('mouseover', function(d) {
+			d3.select(this)
+				.transition()
+				.attr('r', 10);
+
+			tooltip
+				.html('<p class="tooltip-content">' + d.value + '</p>')
+				.style('opacity', 1)
+				.style("left", d3.mouse(this)[0] + 70  + "px")
+				.style("top", d3.mouse(this)[1]  + 70 + "px")
+
+		})
+		.on('mousemove', function() {
+
+			tooltip
+				.style("left", d3.mouse(this)[0] + 50  + "px")
+				.style("top", d3.mouse(this)[1]  + 50 +  "px");
+
+		})
+		.on('mouseout', function() {
+			d3.select(this)
+				.transition()
+				.attr('r', 5);
+
+			tooltip
+				.style('opacity', 0)
+
+		})
+
+
+</script>
+
+
+
+</body>
+

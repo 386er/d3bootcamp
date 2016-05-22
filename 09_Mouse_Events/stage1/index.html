@@ -1,0 +1,51 @@
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+
+<script>
+
+
+	var data = d3.range(0,100).map(function(entry) {
+		 return {x: Math.random()*1200, y: Math.random()*600, value: 'abcdefghijklmnopqrstuvwxyz'.split('')[Math.ceil(Math.random()*27)]}
+	})
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40};
+	var height = 500 - margin.top - margin.bottom;
+	var width = 800 - margin.left - margin.right;
+
+
+	var svg = d3.select('body')
+				.append('svg')
+				.attr('width', width + margin.left + margin.right)
+				.attr('height', height + margin.top + margin.bottom)
+				.append('g')
+				.attr('transform', 'translate('+ margin.left +',' + margin.top +')');
+
+
+	var x = d3.scale.linear()
+					.domain([0, d3.max(data, function(d) {return d.x})])
+					.range([0, width])
+
+	var y = d3.scale.linear()
+					.domain([0, d3.max(data, function(d) {return d.y})])
+					.range([height, 0])
+
+
+
+	svg.selectAll('circle')
+		.data(data)
+		.enter()
+		.append('circle')
+		// YOUR CODE HERE
+
+
+
+
+</script>
+
+
+
+</body>
+
