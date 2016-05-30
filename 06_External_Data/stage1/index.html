@@ -61,7 +61,7 @@ d3.csv("titanic.csv", function(data) {
 		.append('circle')
 		.attr('cx', function(d) {return  x(d.Age)})
 		.attr('cy', function(d) {return y(d.Fare)})
-		.attr('r', function(d) {return d.Age === "" ? 0 :( 3 + 2*d.Survived)})
+		.attr('r', function(d) {return 3 + 2*d.Survived})
 		.attr('fill', function(d) {return c(d.Pclass)})
 
 
